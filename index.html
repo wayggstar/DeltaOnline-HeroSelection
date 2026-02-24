@@ -8,14 +8,14 @@
     <script src="https://bundle.run/skinview3d@3.0.0"></script>
 </head>
 <body>
-<div id="ui-container">
+<div id="ui-root">
     <div class="bg-overlay"></div>
 
-    <main class="hero-display">
+    <main class="hero-display" id="hero-display">
         <div class="hero-info-panel">
-            <h2 id="hero-role-text">DAMAGE</h2>
-            <h1 id="hero-name">VANGUARD</h1>
-            <p id="hero-desc">최첨단 전술 장비로 무장한 보병입니다.</p>
+            <h2 id="hero-role-text">ROLE</h2>
+            <h1 id="hero-name">SELECT HERO</h1>
+            <p id="hero-desc">하단에서 영웅을 선택하세요.</p>
 
             <div id="skill-list" class="skill-container">
             </div>
@@ -27,17 +27,10 @@
     </main>
 
     <footer class="selection-bar">
-        <div class="role-section" id="TANK">
-            <span class="role-title">돌격</span>
-            <div class="icon-grid"></div>
-        </div>
         <div class="role-section" id="DAMAGE">
             <span class="role-title">공격</span>
-            <div class="icon-grid"></div>
-        </div>
-        <div class="role-section" id="SUPPORT">
-            <span class="role-title">지원</span>
-            <div class="icon-grid"></div>
+            <div class="icon-grid">
+            </div>
         </div>
     </footer>
 </div>
