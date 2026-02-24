@@ -1,3 +1,5 @@
+let currentSelectedHeroId = null;
+
 const HERO_LIST = [
     {
         id: "vanguard",
@@ -29,6 +31,7 @@ function init() {
 }
 
 function selectHero(hero, element) {
+    currentSelectedHeroId = hero.id;
     const display = document.getElementById("hero-display");
     display.classList.add("active");
 
@@ -37,18 +40,24 @@ function selectHero(hero, element) {
     document.getElementById("hero-role-text").innerText = hero.role;
     document.getElementById("hero-desc").innerText = hero.desc;
 
-    const layers = document.querySelectorAll('.minecraft-pawn .layer');
-    layers.forEach(layer => {
+    document.querySelectorAll('.minecraft-pawn .layer').forEach(layer => {
         layer.style.backgroundImage = `url('${hero.skin}')`;
     });
 
-    const skillContainer = document.getElementById("skill-list");
-    skillContainer.innerHTML = hero.skills.map(s => `
+    document.getElementById("skill-list").innerHTML = hero.skills.map(s => `
         <div class="skill-slot" style="border-left-color: ${hero.color}">
             <b style="color:${hero.color}">${s.key}: ${s.name}</b><br>
             <span style="font-size: 0.8rem; color: #ccc;">${s.desc}</span>
         </div>
     `).join('');
+
+    const confirmBtn = document.getElementById("confirm-button");
+    confirmBtn.style.display = "block";
+    confirmBtn.onclick = () => {
+        if (window.mcefQuery) {
+            window.mcefQuery({ request: `confirm_hero:${currentSelectedHeroId}` });
+        }
+    };
 
     document.querySelectorAll('.hero-icon').forEach(i => i.classList.remove('active'));
     element.classList.add('active');
