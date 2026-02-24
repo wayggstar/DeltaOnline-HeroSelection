@@ -1,78 +1,27 @@
-:root {
-    --damage-color: #f06449;
-    --accent-color: #ffffff;
-}
-
-body, html {
-    margin: 0; padding: 0; width: 100%; height: 100%;
-    overflow: hidden; background: transparent;
-    color: white; font-family: 'Arial', sans-serif;
-}
-
-.bg-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.8) 100%);
-    pointer-events: none;
-}
-
-/* --- 등장 애니메이션 설정 --- */
-.hero-info-panel, .model-viewport {
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    pointer-events: none;
-}
-
-.hero-info-panel { transform: translateX(-50px) skewX(-5deg); }
-.model-viewport { transform: translateX(50px) scale(0.9); }
-
-/* 활성화 상태 (Hero 선택 시) */
-.hero-display.active .hero-info-panel,
-.hero-display.active .model-viewport {
-    opacity: 1;
-    transform: translateX(0) skewX(-5deg);
-    pointer-events: auto;
-}
-
-.hero-display.active .model-viewport { transform: translateX(0) scale(1); }
-
-/* --- 레이아웃 스타일 --- */
-.hero-display {
-    display: flex; height: 75vh; padding: 0 10%;
-    align-items: center; justify-content: space-between;
-}
-
-#hero-name { font-size: 5rem; margin: 0; font-weight: 900; font-style: italic; text-transform: uppercase; }
-#hero-role-text { font-size: 1.2rem; margin: 0; color: var(--damage-color); letter-spacing: 5px; }
-#hero-desc { width: 450px; font-size: 1.1rem; color: #ccc; margin: 20px 0; line-height: 1.5; }
-
-.skill-slot {
-    background: rgba(0,0,0,0.6); padding: 12px; margin-bottom: 8px;
-    border-left: 4px solid var(--accent-color); width: 350px;
-}
-.skill-slot b { display: block; color: var(--accent-color); margin-bottom: 4px; }
-.skill-slot span { font-size: 0.85rem; color: #bbb; }
-
+/* 하단 선택 바 레이아웃 유지 */
 .selection-bar {
     position: fixed; bottom: 0; width: 100%; height: 25vh;
-    background: rgba(10, 10, 10, 0.9); display: flex;
-    justify-content: center; align-items: center; border-top: 2px solid #333;
+    background: rgba(10, 10, 10, 0.9);
+    display: flex; justify-content: center; align-items: center;
+    border-top: 1px solid #333; z-index: 10;
+    gap: 50px; /* 역할군 간의 간격 */
 }
 
-.role-title { color: #666; font-size: 0.8rem; margin-bottom: 10px; font-weight: bold; display: block; text-align: center; }
-
-/* 얼굴 자르기 기법 */
+/* ★ 얼굴 아이콘 표시 핵심 수정 ★ */
 .hero-icon {
-    width: 60px; height: 80px; background-color: #222;
+    display: block !important; /* 강제 표시 */
+    width: 64px; height: 80px;
+    background-color: #222;
     background-repeat: no-repeat;
-    background-size: 480px; /* 64px * 7.5배 */
-    background-position: -60px -60px; /* (8,8) 좌표 * 7.5 */
+    background-size: 512px 512px; /* 64px 스킨을 8배 확대한 크기 */
+    background-position: -64px -64px; /* 얼굴(8,8) 위치 조준 */
     image-rendering: pixelated;
     clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
-    cursor: pointer; transition: 0.3s;
-    filter: grayscale(0.8); border: 1px solid #444;
+    cursor: pointer; transition: 0.2s;
+    filter: grayscale(1); border: 2px solid #444;
 }
 
 .hero-icon:hover, .hero-icon.active {
-    filter: grayscale(0); transform: scale(1.1) translateY(-10px);
-    background-color: #eee;
+    filter: grayscale(0); transform: scale(1.1);
+    border-color: #fff; background-color: #444;
 }
