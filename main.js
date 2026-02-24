@@ -32,29 +32,26 @@ function selectHero(hero, element) {
     const display = document.getElementById("hero-display");
     display.classList.add("active");
 
-    // 텍스트 정보 업데이트
     document.getElementById("hero-name").innerText = hero.name;
     document.getElementById("hero-name").style.color = hero.color;
     document.getElementById("hero-role-text").innerText = hero.role;
     document.getElementById("hero-desc").innerText = hero.desc;
 
-    // 캐릭터 레이어 조립 (배경 조각 현상 방지)
     const layers = document.querySelectorAll('.minecraft-pawn .layer');
     layers.forEach(layer => {
         layer.style.backgroundImage = `url('${hero.skin}')`;
     });
 
-    // 스킬 목록 생성
     const skillContainer = document.getElementById("skill-list");
     skillContainer.innerHTML = hero.skills.map(s => `
-        <div class="skill-slot" style="border-left: 4px solid ${hero.color}; background: rgba(255,255,255,0.05); padding: 10px; margin-top: 10px;">
+        <div class="skill-slot" style="border-left-color: ${hero.color}">
             <b style="color:${hero.color}">${s.key}: ${s.name}</b><br>
             <span style="font-size: 0.8rem; color: #ccc;">${s.desc}</span>
         </div>
     `).join('');
 
-    // 아이콘 강조
     document.querySelectorAll('.hero-icon').forEach(i => i.classList.remove('active'));
     element.classList.add('active');
 }
+
 document.addEventListener("DOMContentLoaded", init);
