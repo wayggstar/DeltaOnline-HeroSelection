@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영웅 선택</title>
+    <title>Minecraft Hero Selection</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://bundle.run/skinview3d@3.0.0"></script>
 </head>
 <body>
-<div id="ui-root">
-    <div class="background-overlay"></div>
+<div id="ui-container">
+    <div class="bg-overlay"></div>
 
-    <section class="hero-display">
-        <div class="info-box">
+    <main class="hero-display">
+        <div class="hero-info-panel">
             <h2 id="hero-role-text">DAMAGE</h2>
             <h1 id="hero-name">VANGUARD</h1>
-            <p id="hero-desc">전술적인 사격과 기동성으로 전장을 압도합니다.</p>
+            <p id="hero-desc">최첨단 전술 장비로 무장한 보병입니다.</p>
 
-            <div class="skill-container">
-                <div class="skill-slot">SHIFT: 질주</div>
-                <div class="skill-slot">E: 수류탄</div>
-                <div class="skill-slot">Q: 전술 고글</div>
+            <div id="skill-list" class="skill-container">
             </div>
         </div>
-        <canvas id="skin-viewer"></canvas>
-    </section>
 
-    <footer class="selection-footer">
-        <div class="role-container" id="TANK">
-            <div class="role-label">돌격</div>
+        <div class="model-viewport">
+            <canvas id="skin-viewer"></canvas>
+        </div>
+    </main>
+
+    <footer class="selection-bar">
+        <div class="role-section" id="TANK">
+            <span class="role-title">돌격</span>
             <div class="icon-grid"></div>
         </div>
-        <div class="role-container" id="DAMAGE">
-            <div class="role-label">공격</div>
+        <div class="role-section" id="DAMAGE">
+            <span class="role-title">공격</span>
             <div class="icon-grid"></div>
         </div>
-        <div class="role-container" id="SUPPORT">
-            <div class="role-label">지원</div>
+        <div class="role-section" id="SUPPORT">
+            <span class="role-title">지원</span>
             <div class="icon-grid"></div>
         </div>
     </footer>

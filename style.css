@@ -1,63 +1,67 @@
 :root {
-    --accent-color: #f0edff;
-    --damage-color: #ef4444;
-    --tank-color: #3b82f6;
-    --support-color: #22c55e;
+    --accent-color: #ffffff;
+    --damage-color: #f06449;
+    --panel-bg: rgba(0, 0, 0, 0.6);
 }
 
 body, html {
     margin: 0; padding: 0; width: 100%; height: 100%;
-    background-color: transparent; /* 마크 배경을 위해 투명 유지 */
-    color: white; font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
+    overflow: hidden; background: transparent;
+    color: white; font-family: 'Arial', sans-serif;
 }
 
-.background-overlay {
+.bg-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 70%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, transparent 60%);
     pointer-events: none;
 }
 
-/* 영웅 정보 섹션 */
+/* 상단 정보 패널 */
 .hero-display {
-    position: relative; height: 75vh;
-    display: flex; align-items: center; padding-left: 8%;
+    display: flex; height: 75vh; padding: 5% 8%;
+    align-items: center; justify-content: space-between;
 }
 
-.info-box {
-    transform: skewX(-10deg); /* 전체적인 기울기 */
-    z-index: 10;
+.hero-info-panel { z-index: 10; transform: skewX(-5deg); }
+#hero-name { font-size: 5rem; margin: 0; font-weight: 900; font-style: italic; text-transform: uppercase; }
+#hero-role-text { font-size: 1.2rem; margin: 0; color: var(--damage-color); letter-spacing: 5px; }
+#hero-desc { width: 450px; font-size: 1.1rem; color: #ccc; line-height: 1.6; margin: 20px 0; }
+
+.skill-slot {
+    background: var(--panel-bg); padding: 12px; margin-bottom: 10px;
+    border-left: 4px solid var(--accent-color); width: 350px;
 }
+.skill-slot b { color: var(--accent-color); font-size: 0.9rem; }
+.skill-slot span { display: block; font-size: 0.85rem; color: #bbb; }
 
-.info-box h1 { font-size: 5rem; margin: 0; font-weight: 900; letter-spacing: -2px; }
-.info-box h2 { font-size: 1.5rem; margin: 0; color: var(--damage-color); }
-.info-box p { width: 400px; font-size: 1.1rem; color: #ccc; margin-top: 10px; }
+/* 캐릭터 모델 */
+.model-viewport { flex-grow: 1; display: flex; justify-content: flex-end; }
+#skin-viewer { cursor: grab; }
 
-.skill-container { display: flex; gap: 10px; margin-top: 20px; }
-.skill-slot { background: rgba(255,255,255,0.1); padding: 5px 15px; border-left: 4px solid var(--accent-color); }
-
-#skin-viewer {
-    position: absolute; right: 10%; bottom: 0;
-}
-
-/* 하단 선택바 */
-.selection-footer {
+/* 하단 선택 바 */
+.selection-bar {
     position: fixed; bottom: 0; width: 100%; height: 25vh;
-    background: rgba(10, 10, 10, 0.85);
-    display: flex; justify-content: center; align-items: center;
-    border-top: 3px solid rgba(255,255,255,0.2);
+    background: rgba(15, 15, 15, 0.95); display: flex;
+    justify-content: center; align-items: center; border-top: 2px solid #333;
 }
 
-.role-container { display: flex; flex-direction: column; align-items: center; margin: 0 30px; }
-.role-label { font-weight: bold; margin-bottom: 10px; color: #888; text-transform: uppercase; }
-.icon-grid { display: flex; gap: 12px; }
+.role-section { display: flex; flex-direction: column; align-items: center; padding: 0 40px; }
+.role-title { color: #666; font-size: 0.8rem; margin-bottom: 15px; font-weight: bold; }
+.icon-grid { display: flex; gap: 15px; }
 
+/* ★ 스킨 얼굴 자르기 (images 폴더 경로 적용) */
 .hero-icon {
-    width: 70px; height: 90px; background: #333;
-    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%); /* 사선 박스 */
-    cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255,255,255,0.1);
+    width: 60px; height: 75px; background-color: #222;
+    background-repeat: no-repeat;
+    background-size: 480px; /* 64px 스킨을 7.5배 확대 */
+    background-position: -60px -60px; /* 얼굴 좌표 8px * 7.5 = 60px */
+    image-rendering: pixelated; /* 도트 뭉개짐 방지 */
+    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
+    cursor: pointer; transition: 0.2s;
+    filter: grayscale(0.5); border: 1px solid #444;
 }
 
-.hero-icon:hover { background: var(--accent-color); transform: scale(1.1) translateY(-10px); }
-.hero-icon.active { background: white; border: 3px solid var(--damage-color); }
+.hero-icon:hover, .hero-icon.active {
+    filter: grayscale(0); transform: scale(1.1) translateY(-10px);
+    background-color: #444; border-color: var(--accent-color);
+}
