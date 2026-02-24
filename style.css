@@ -1,11 +1,11 @@
 :root {
     --damage-color: #f06449;
-    --accent-color: #ffffff;
 }
 
 body, html {
     margin: 0; padding: 0; width: 100%; height: 100%;
-    overflow: hidden; background-color: #050505;
+    overflow: hidden;
+    background-color: #050505; /* 의도하신 대로 불투명 배경 유지 */
     color: white; font-family: 'Arial', sans-serif;
 }
 
@@ -17,9 +17,9 @@ body, html {
 
 .hero-display {
     position: relative; z-index: 5;
-    display: flex; height: 75vh; padding: 0 10%;
+    display: flex; height: 75vh; padding: 0 8%;
     align-items: center;
-    justify-content: space-between; /* 정보는 왼쪽, 캐릭터는 오른쪽 */
+    justify-content: space-between; /* 글자는 왼쪽, 캐릭터는 오른쪽 */
     visibility: hidden; opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -28,27 +28,18 @@ body, html {
 
 .hero-info-panel {
     flex: 1;
-    max-width: 550px;
+    max-width: 500px; /* 글자 영역이 캐릭터를 침범하지 않게 제한 */
     z-index: 10;
 }
 
-#hero-name { font-size: 5rem; font-weight: 900; margin: 0; text-transform: uppercase; }
-#hero-role-text { color: var(--damage-color); letter-spacing: 3px; }
-
-.model-viewport {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
+/* 캐릭터 조립 컨테이너 */
 .minecraft-pawn {
     position: relative;
     width: 128px; height: 256px;
-    transform: scale(1.6);
+    transform: scale(1.6); /* MCEF 해상도에 맞춰 크기 조절 */
     image-rendering: pixelated;
     background: none !important;
-    filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.5));
+    margin-right: 50px;
 }
 
 .layer {
@@ -58,35 +49,10 @@ body, html {
     z-index: 2;
 }
 
-.head      { width: 64px; height: 64px; top: 0; left: 32px; background-position: -64px -64px; }
-.body      { width: 64px; height: 96px; top: 64px; left: 32px; background-position: -160px -160px; }
-.left-arm  { width: 32px; height: 96px; top: 64px; left: 0; background-position: -352px -160px; }
+/* 정면 좌표 (표준 스킨 기준) */
+.head { width: 64px; height: 64px; top: 0; left: 32px; background-position: -64px -64px; }
+.body { width: 64px; height: 96px; top: 64px; left: 32px; background-position: -160px -160px; }
+.left-arm { width: 32px; height: 96px; top: 64px; left: 0; background-position: -352px -160px; }
 .right-arm { width: 32px; height: 96px; top: 64px; left: 96px; background-position: -352px -160px; }
-.left-leg  { width: 32px; height: 96px; top: 160px; left: 32px; background-position: -32px -160px; }
+.left-leg { width: 32px; height: 96px; top: 160px; left: 32px; background-position: -32px -160px; }
 .right-leg { width: 32px; height: 96px; top: 160px; left: 64px; background-position: -32px -160px; }
-
-.selection-bar {
-    position: fixed; bottom: 0; width: 100%; height: 25vh;
-    background: rgba(10, 10, 10, 0.95);
-    display: flex; justify-content: center; align-items: center;
-    border-top: 1px solid #333; z-index: 20; gap: 40px;
-}
-
-.icon-grid { display: flex; gap: 10px; }
-.hero-icon {
-    width: 64px; height: 80px;
-    background-color: #222;
-    background-size: 512px 512px;
-    background-position: -64px -64px;
-    image-rendering: pixelated;
-    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
-    cursor: pointer; transition: 0.2s;
-    filter: grayscale(1); border: 2px solid #444;
-}
-
-.hero-icon.active { filter: grayscale(0); border-color: white; transform: translateY(-5px); }
-
-.skill-slot {
-    background: rgba(255,255,255,0.05);
-    padding: 12px; margin-top: 10px; border-left: 4px solid var(--damage-color);
-}
