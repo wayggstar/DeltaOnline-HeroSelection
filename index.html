@@ -6,33 +6,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="ui-root">
-    <div class="bg-overlay"></div>
-    <main class="hero-display" id="hero-display">
-        <div class="hero-info-panel">
-            <h2 id="hero-role-text">ROLE</h2>
-            <h1 id="hero-name">SELECT HERO</h1>
-            <p id="hero-desc">하단에서 영웅을 선택하세요.</p>
-            <div id="skill-list" class="skill-container"></div>
-            <button id="confirm-button" class="confirm-btn" style="display: none;">영웅 선택 완료</button>
+<div class="bg-overlay"></div>
+<main class="hero-display" id="hero-display">
+    <div class="hero-info-panel">
+        <h2 id="hero-role-text">ROLE</h2>
+        <h1 id="hero-name">SELECT HERO</h1>
+        <p id="hero-desc">하단에서 영웅을 선택하세요.</p>
+        <div id="skill-list" class="skill-container"></div>
+        <button id="confirm-button" class="confirm-btn" style="display: none;">영웅 선택 완료</button>
+    </div>
+    <div class="model-viewport">
+        <div class="minecraft-pawn">
+            <div class="layer head"></div><div class="layer body"></div>
+            <div class="layer left-arm"></div><div class="layer right-arm"></div>
+            <div class="layer left-leg"></div><div class="layer right-leg"></div>
         </div>
-        <div class="model-viewport">
-            <div id="hero-front-view" class="minecraft-pawn">
-                <div class="layer head"></div>
-                <div class="layer body"></div>
-                <div class="layer left-arm"></div>
-                <div class="layer right-arm"></div>
-                <div class="layer left-leg"></div>
-                <div class="layer right-leg"></div>
-            </div>
-        </div>
-    </main>
-    <footer class="selection-bar">
-        <div class="role-section" id="TANK"><span class="role-title">돌격</span><div class="icon-grid"></div></div>
-        <div class="role-section" id="DAMAGE"><span class="role-title">공격</span><div class="icon-grid"></div></div>
-        <div class="role-section" id="SUPPORT"><span class="role-title">지원</span><div class="icon-grid"></div></div>
-    </footer>
-</div>
+    </div>
+</main>
+<footer class="selection-bar">
+    <div class="role-section" id="TANK"><span class="role-title">돌격</span><div class="icon-grid"></div></div>
+    <div class="role-section" id="DAMAGE"><span class="role-title">공격</span><div class="icon-grid"></div></div>
+    <div class="role-section" id="SUPPORT"><span class="role-title">지원</span><div class="icon-grid"></div></div>
+</footer>
 <script src="main.js"></script>
 </body>
 </html>

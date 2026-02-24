@@ -32,9 +32,7 @@ function init() {
 
 function selectHero(hero, element) {
     currentSelectedHeroId = hero.id;
-    const display = document.getElementById("hero-display");
-    display.classList.add("active");
-
+    document.getElementById("hero-display").classList.add("active");
     document.getElementById("hero-name").innerText = hero.name;
     document.getElementById("hero-name").style.color = hero.color;
     document.getElementById("hero-role-text").innerText = hero.role;
@@ -53,14 +51,16 @@ function selectHero(hero, element) {
 
     const confirmBtn = document.getElementById("confirm-button");
     confirmBtn.style.display = "block";
-    confirmBtn.onclick = () => {
-        if (window.mcefQuery) {
-            window.mcefQuery({ request: `confirm_hero:${currentSelectedHeroId}` });
-        }
-    };
+    confirmBtn.onclick = () => confirmHero();
 
     document.querySelectorAll('.hero-icon').forEach(i => i.classList.remove('active'));
     element.classList.add('active');
+}
+
+function confirmHero() {
+    if (currentSelectedHeroId) {
+        window.location.href = `mcef://confirm_hero:${currentSelectedHeroId}`;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", init);
