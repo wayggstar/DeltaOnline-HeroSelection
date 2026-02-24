@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Hero Selection</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://bundle.run/skinview3d@3.0.0"></script>
 </head>
 <body>
 <div id="ui-root">
@@ -16,13 +15,18 @@
             <h2 id="hero-role-text">ROLE</h2>
             <h1 id="hero-name">SELECT HERO</h1>
             <p id="hero-desc">하단에서 영웅을 선택하세요.</p>
-
-            <div id="skill-list" class="skill-container">
-            </div>
+            <div id="skill-list" class="skill-container"></div>
         </div>
 
         <div class="model-viewport">
-            <canvas id="skin-viewer"></canvas>
+            <div id="hero-front-view" class="minecraft-pawn">
+                <div class="layer head"></div>
+                <div class="layer body"></div>
+                <div class="layer left-arm"></div>
+                <div class="layer right-arm"></div>
+                <div class="layer left-leg"></div>
+                <div class="layer right-leg"></div>
+            </div>
         </div>
     </main>
 

@@ -5,61 +5,88 @@
 
 body, html {
     margin: 0; padding: 0; width: 100%; height: 100%;
-    overflow: hidden; background-color: #000; /* 기본 배경을 검정으로 고정 */
+    overflow: hidden; background-color: #050505;
     color: white; font-family: 'Arial', sans-serif;
 }
 
-/* 배경 그라데이션: 중앙 흰색을 어둡게 조절하여 캐릭터가 돋보이게 함 */
 .bg-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(60, 60, 60, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
-    pointer-events: none; z-index: 1;
+    background: radial-gradient(circle at center, rgba(40,40,40,0.4) 0%, rgba(0,0,0,0.9) 100%);
+    z-index: 1;
 }
 
-/* 상단 정보 영역 */
 .hero-display {
     position: relative; z-index: 5;
     display: flex; height: 75vh; padding: 0 10%;
-    align-items: center; justify-content: space-between;
-    opacity: 0; /* 영웅 선택 전에는 숨김 */
-    transition: opacity 0.5s ease-in-out;
+    align-items: center;
+    justify-content: space-between; /* 정보는 왼쪽, 캐릭터는 오른쪽 */
+    visibility: hidden; opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.hero-display.active { opacity: 1; }
+.hero-display.active { visibility: visible; opacity: 1; }
 
-.hero-info-panel { flex: 1; transform: skewX(-5deg); }
+.hero-info-panel {
+    flex: 1;
+    max-width: 550px;
+    z-index: 10;
+}
+
 #hero-name { font-size: 5rem; font-weight: 900; margin: 0; text-transform: uppercase; }
-#hero-role-text { font-size: 1.2rem; letter-spacing: 5px; color: var(--damage-color); }
+#hero-role-text { color: var(--damage-color); letter-spacing: 3px; }
 
-/* 3D 모델 영역 */
-.model-viewport { flex: 1; display: flex; justify-content: center; align-items: center; }
-#skin-viewer { width: 450px; height: 550px; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); }
+.model-viewport {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
-/* 하단 선택 바 */
+.minecraft-pawn {
+    position: relative;
+    width: 128px; height: 256px;
+    transform: scale(1.6);
+    image-rendering: pixelated;
+    background: none !important;
+    filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.5));
+}
+
+.layer {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 512px 512px;
+    z-index: 2;
+}
+
+.head      { width: 64px; height: 64px; top: 0; left: 32px; background-position: -64px -64px; }
+.body      { width: 64px; height: 96px; top: 64px; left: 32px; background-position: -160px -160px; }
+.left-arm  { width: 32px; height: 96px; top: 64px; left: 0; background-position: -352px -160px; }
+.right-arm { width: 32px; height: 96px; top: 64px; left: 96px; background-position: -352px -160px; }
+.left-leg  { width: 32px; height: 96px; top: 160px; left: 32px; background-position: -32px -160px; }
+.right-leg { width: 32px; height: 96px; top: 160px; left: 64px; background-position: -32px -160px; }
+
 .selection-bar {
     position: fixed; bottom: 0; width: 100%; height: 25vh;
-    background: rgba(15, 15, 15, 0.95);
+    background: rgba(10, 10, 10, 0.95);
     display: flex; justify-content: center; align-items: center;
-    border-top: 1px solid #333; z-index: 10; gap: 60px;
+    border-top: 1px solid #333; z-index: 20; gap: 40px;
 }
 
-.role-section { display: flex; flex-direction: column; align-items: center; }
-.role-title { color: #888; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; }
-.icon-grid { display: flex; gap: 15px; min-height: 80px; }
-
-/* 영웅 얼굴 아이콘 (VANGUARD 전용 좌표) */
+.icon-grid { display: flex; gap: 10px; }
 .hero-icon {
     width: 64px; height: 80px;
     background-color: #222;
-    background-size: 512px; /* 64px 스킨의 8배 */
-    background-position: -64px -64px; /* 얼굴 좌표 */
+    background-size: 512px 512px;
+    background-position: -64px -64px;
     image-rendering: pixelated;
     clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
     cursor: pointer; transition: 0.2s;
-    filter: grayscale(1); border: 2px solid transparent;
+    filter: grayscale(1); border: 2px solid #444;
 }
 
-.hero-icon:hover, .hero-icon.active {
-    filter: grayscale(0); transform: translateY(-10px) scale(1.1);
-    border-color: #fff; background-color: #444;
+.hero-icon.active { filter: grayscale(0); border-color: white; transform: translateY(-5px); }
+
+.skill-slot {
+    background: rgba(255,255,255,0.05);
+    padding: 12px; margin-top: 10px; border-left: 4px solid var(--damage-color);
 }
